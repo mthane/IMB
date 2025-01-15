@@ -152,13 +152,8 @@ create_dataset_from_dir <-
           "vidAndLogs/metadata.txt"
         ),
         collapse = "/")
-      print(meta_dir)
       
-      file_found = file.info(meta_dir)$size
-      if(is.na(file_found)){
-        file_found=0
-      }
-      if (file_found == 0) {
+      if ((file.info(meta_dir)$size == 0)) {
         odor_location = NA
       } else{
         metadata <- read.delim(meta_dir)
@@ -307,13 +302,13 @@ analyze_data <-
                                )
         tracks[[tcount]] <- as.data.table(track)
         end_interval <- Sys.time() - start_interval
+
         if (tcount %% 200 == 0) {
           gc()
         }
         
       }
       tcount = tcount + 1
-      
     }
     
     message("bind rows... this can take some minutes")
