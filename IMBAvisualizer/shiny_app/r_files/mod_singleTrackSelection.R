@@ -46,7 +46,7 @@ mod_singleTrackSelection_server <- function(id,upload,threshold) {
       tracks_table <- reactive({
         req(frameDataIndividual())
         frameDataIndividual() %>%
-            group_by(id, name, trial, condition, group) %>%
+            group_by(id, name, trial, condition, group,Visited_Sides,visited,visited_seq) %>%
             summarise()
       })
 
