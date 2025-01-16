@@ -741,7 +741,7 @@ calculate_step_variables <- function(df,
                     "midpoint_speed",
                     step_start_idx)
     
-    #IS_bending <-
+    #IS_bending <- #new after Thane et al 2023
      # interval_mean(df,
       #              step_start_idx,
        #             step_end_idx,
@@ -774,34 +774,34 @@ calculate_step_variables <- function(df,
     gt_1min <- extr$gt_1min
     minima <- extr$minima
     
-    #hextr <- head_extr (df,  #new after Thane et al. 2023
-     #                   step_start_idx,
-      #                  step_end_idx,
-     #                   step_start_idx)
+    hextr <- head_extr (df,  #new after Thane et al. 2023
+                        step_start_idx,
+                        step_end_idx,
+                        step_start_idx)
     
-    #step_hmax <- hextr$step_hmax #new after Thane et al. 2023
-    #gh_3max  <- hextr$gh_3max #new after Thane et al. 2023
-    #hmaxima  <- hextr$hmaxima #new after Thane et al. 2023
+    step_hmax <- hextr$step_hmax #new after Thane et al. 2023
+    gh_3max  <- hextr$gh_3max #new after Thane et al. 2023
+    hmaxima  <- hextr$hmaxima #new after Thane et al. 2023
     
-    #IS_maxhvel <-   #new after Thane et al. 2023
-     # interval_max(df,
-      #              step_start_idx,
-       #             step_end_idx,
-        #            "head_vel_forward",
-         #           step_start_idx)
+    IS_maxhvel <-   #new after Thane et al. 2023
+      interval_max(df,
+                    step_start_idx,
+                    step_end_idx,
+                    "head_vel_forward",
+                    step_start_idx)
     
-   # step_tvel <- df$tail_vel_forward[which(step_boolean = T)] #new after Thane et al. 2023
+    #step_tvel <- df$tail_vel_forward[which(step_boolean = T)] #new after Thane et al. 2023
     
     
     
-    #headtail_interval  <-   #new after Thane et al. 2023
-     # interval_maxindex(df,
-      #             step_start_idx,
-       #            step_end_idx,
-        #           "head_vel_forward",
-         #          step_start_idx)
+    headtail_interval  <-   #new after Thane et al. 2023
+      interval_maxindex(df,
+                   step_start_idx,
+                   step_end_idx,
+                   "head_vel_forward",
+                   step_start_idx)
     
-    #headtail_interval  <- (headtail_interval-1)/frame_rate
+    headtail_interval  <- (headtail_interval-1)/frame_rate #new after Thane et al. 2023
 
     
   } else{
@@ -820,11 +820,11 @@ calculate_step_variables <- function(df,
     gt_1min = rep(NA, nrow(df))
     minima = rep(NA, nrow(df))
     run_direction= rep(NA,nrow(df))
-    #step_hmax= rep(NA,nrow(df))
-    #gh_3max= rep(NA,nrow(df))
-    #hmaxima= rep(NA,nrow(df))
-    #IS_maxhvel= rep(NA,nrow(df))
-    #headtail_interval= rep(NA,nrow(df))
+    step_hmax= rep(NA,nrow(df))
+    gh_3max= rep(NA,nrow(df))
+    hmaxima= rep(NA,nrow(df))
+    IS_maxhvel= rep(NA,nrow(df))
+    headtail_interval= rep(NA,nrow(df))
   }
   return(
     data.frame(
@@ -843,11 +843,11 @@ calculate_step_variables <- function(df,
       step_extr,
       gt_1min,
       minima
-      #step_hmax,
-      #gh_3max,
-      #hmaxima,
-      #IS_maxhvel,
-      #headtail_interval
+      step_hmax,
+      gh_3max,
+      hmaxima,
+      IS_maxhvel,
+      headtail_interval
     )
   )
 }
@@ -1144,10 +1144,10 @@ process_track <- function(track,
                                    threshold_tail_speed_foward = 0.3,
                                    threshold_tail_speed_backward = threshold_tail_speed_backward))%>%
     mutate(
-      #headtail_ratio = IS_maxhvel/tail_vel_forward, #new after Thane et al. 2023
-      #headtail_interval_end = IS_interval - headtail_interval,
-      #headtail_interval_min = pmin(headtail_interval, headtail_interval_end, na.rm=T),
-      #headtail_interval_ratio = headtail_interval_min/IS_interval, #new after Thane et al. 2023
+      headtail_ratio = IS_maxhvel/tail_vel_forward, #new after Thane et al. 2023
+      headtail_interval_end = IS_interval - headtail_interval, #new after Thane et al. 2023
+      headtail_interval_min = pmin(headtail_interval, headtail_interval_end, na.rm=T), #new after Thane et al. 2023
+      headtail_interval_ratio = headtail_interval_min/IS_interval, #new after Thane et al. 2023
       IS_distance_bl = IS_distance / mean(spine_length, na.rm =T),
       run_speed_bl = run_speed / mean(spine_length, na.rm =T)
     )%>%

@@ -1,4 +1,4 @@
 
 global_vars = function(){
-  readRDS("~/IMBA/IMBAvisualizer/shiny_app/global_variables.Rds")
+  readRDS("~/IMBA/IMBA/IMBAvisualizer/shiny_app/global_variables.Rds")
 }

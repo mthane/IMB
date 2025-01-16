@@ -408,13 +408,13 @@ summarise_RUN_per_group_dt <- function(data,
     
     step_extr_mean = mean(step_extr,na.rm=T),
     
-    ratio_minima = 1-sum(gt_1min,na.rm=T)/.N
+    ratio_minima = 1-sum(gt_1min,na.rm=T)/.N,
     
-    #step_head_max = mean(step_hmax,na.rm=T),
+    step_head_max = mean(step_hmax,na.rm=T),
     
-    #headtail_ratio_mean = mean(headtail_ratio,na.rm=T),
+    headtail_ratio_mean = mean(headtail_ratio,na.rm=T),
     
-    #headtail_interval_ratio_mean = mean(headtail_interval_ratio,na.rm=T)
+    headtail_interval_ratio_mean = mean(headtail_interval_ratio,na.rm=T)
     
   ),by=grouped_by]
   

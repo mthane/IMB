@@ -13,7 +13,7 @@ list_names <- function(df,cat){
 
 
 ##### SINGLE
-SINGLE_VARTABLE = read.csv("variables/singleModeVariables.csv", encoding="UTF-8")
+SINGLE_VARTABLE = read.csv("~/IMBA/IMBA/IMBAvisualizer/shiny_app/variables/singleModeVariables.csv", encoding="UTF-8")
 
 SPINES <-
   unlist(str_split(paste(
@@ -67,7 +67,7 @@ SINGLE_VARIABLES =
 ##### BINNING #####
 
 
-BINNING_VARTABLE = read.csv("variables/binningVariables.csv")
+BINNING_VARTABLE = read.csv("~/IMBA/IMBA/IMBAvisualizer/shiny_app/variables/binningVariables.csv")
 
 
 BINNING_VARIABLES =
@@ -77,7 +77,7 @@ BINNING_VARIABLES =
        `Pref-Variables` =list_names(BINNING_VARTABLE,"PREF")
   )
 
-HEATMAP_VARTABLE = read.csv("variables/heatmapVariables.csv", encoding="UTF-8")
+HEATMAP_VARTABLE = read.csv("~/IMBA/IMBA/IMBAvisualizer/shiny_app/variables/heatmapVariables.csv", encoding="UTF-8")
 
 HEATMAP_VARIABLES =
   list(`TS-Variables` = list_names(HEATMAP_VARTABLE,"TS"),
@@ -90,7 +90,7 @@ HEATMAP_VARIABLES =
 
 
 #####  SUMMARY #####
-SUMMARY_VARTABLE = read.csv("variables/summaryVariables.csv", encoding="UTF-8")%>%
+SUMMARY_VARTABLE = read.csv("~/IMBA/IMBA/IMBAvisualizer/shiny_app/variables/summaryVariables.csv", encoding="UTF-8")%>%
   filter(variable!="")
 
 TS_VARIABLES <-  list_names(SUMMARY_VARTABLE,"TS")
@@ -142,4 +142,4 @@ VARIABLES <- list(
   SUMMARY_VARIABLES = SUMMARY_VARIABLES,
   SUMMARY_VARIABLES_2 = SUMMARY_VARIABLES_2
 )
-saveRDS(VARIABLES,"global_variables.Rds")
+saveRDS(VARIABLES,"~/IMBA/IMBA/IMBAvisualizer/shiny_app/global_variables.Rds")
