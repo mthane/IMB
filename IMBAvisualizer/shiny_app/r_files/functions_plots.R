@@ -413,7 +413,8 @@ binning_data_plot <- function(data,
                               npoints = 11,
                               circ=FALSE,
                               binning_mode = "dish",
-                              use_polar = T
+                              use_polar = T,
+                              group_condition="group_condition"
 ){
   message("binning data ...")
   
@@ -460,7 +461,7 @@ binning_data_plot <- function(data,
   
   if(y %in% ci_vars | binning_mode!="all"){
     data <- data %>%
-      group_by(group_condition) %>%
+      group_by(all_of(group_condition)) %>%
       summarise(
         N = N,
         midpoint = midpoint,

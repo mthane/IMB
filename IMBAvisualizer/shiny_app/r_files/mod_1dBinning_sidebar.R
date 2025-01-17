@@ -42,8 +42,10 @@ mod_1dbinning_sidebar_ui <- function(id) {
       "Binning Mode",
       choices = c("Population" = "all",
                   "Dish" = "trial",
-                  "Individual" = "id")
+                  "Individual" = "id"
+                  )
     ),      
+    checkboxInput(ns("visited_sides"),"Visited Sides"),
     actionButton(ns("binning_button"), "Update binning")
     
   )
@@ -109,11 +111,15 @@ mod_1dbinning_sidebar_server <- function(id, upload) {
                    )
                    
                  })
-                 
+
                  binnedData <- eventReactive(input$binning_button, {
                    x_var <- input$xvar
                    
-                   
+                   if(input$visited_sides==T){
+                     group_condition="Visited_Sides"
+                   }else{
+                     group_condition="group_condition"
+                   }
                    withCallingHandlers({
                      data <- upload()$data
                      data$group_condition <- paste(data$group,data$condition,sep="-")
@@ -124,6 +130,7 @@ mod_1dbinning_sidebar_server <- function(id, upload) {
                        suppressWarnings({
                          
                          if(input$binning_mode =="all"){
+                           print(group_condition)
                            df <-
                              binning_data(
                                df = data,
@@ -138,7 +145,8 @@ mod_1dbinning_sidebar_server <- function(id, upload) {
                                abs_y_angle_interval = filters$abs_y_angle,
                                radius = upload()$radius,
                                frame_rate=upload()$frame_rate,
-                               filters$direction
+                               filters$direction,
+                               group_condition=group_condition
                              )
                            
                          }else{
@@ -157,7 +165,8 @@ mod_1dbinning_sidebar_server <- function(id, upload) {
                                radius = upload()$radius,
                                frame_rate=upload()$frame_rate,
                                grouping=input$binning_mode,
-                               filters$direction
+                               filters$direction,
+                               group_condition=group_condition
                              )
                            
                          }

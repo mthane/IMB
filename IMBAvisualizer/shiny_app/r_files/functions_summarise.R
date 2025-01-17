@@ -283,7 +283,7 @@ summarise_TRACK_per_group_dt <- function(data,
     visited = paste(visited[1],sep=" "),
     
     visited_sides = Visited_Sides[1],
-    visited_seq = visited_seq[1]
+    visited_seq = paste(visited_seq[1],sep=" ")
   )
   ,by=grouped_by]
   
