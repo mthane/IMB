@@ -842,7 +842,7 @@ calculate_step_variables <- function(df,
       step_idx,
       step_extr,
       gt_1min,
-      minima
+      minima,
       step_hmax,
       gh_3max,
       hmaxima,
