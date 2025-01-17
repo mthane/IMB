@@ -1051,7 +1051,9 @@ process_track <- function(track,
              )) %>%
     mutate(
       head_vector_angular_speed = calculate_head_vector_angular_speed(., frame_rate),
-      tail_vector_angular_speed = calculate_tail_vector_angular_speed(., frame_rate)
+      tail_vector_angular_speed = calculate_tail_vector_angular_speed(., frame_rate),
+      abs_head_vector_angular_speed = abs(head_vector_angular_speed),
+      abs_tail_vector_angular_speed = abs(tail_vector_angular_speed),
     ) %>%
     mutate(
       abs_head_vector_angular_speed =abs(head_vector_angular_speed),
@@ -1059,7 +1061,9 @@ process_track <- function(track,
     )%>%
     mutate(
       head_vel_forward = calculate_head_vel_forward(., frame_rate),
-      tail_vel_forward = calculate_tail_vel_forward(., frame_rate)
+      abs_head_vel_forward = abs(head_vel_forward),
+      tail_vel_forward = calculate_tail_vel_forward(., frame_rate),
+      abs_tail_vel_forward = abs(tail_vel_forward)
     ) %>%
     mutate(
       head_vel_forward_bl = head_vel_forward / mean(spine_length, na.rm = T),
